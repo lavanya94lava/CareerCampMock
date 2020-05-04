@@ -1,1 +1,20 @@
-Hello
+<%if(locals.employee){%>
+    <h1>Hiiiii, <%= employee.name%>, what do you want to view?</h1>
+    <br>
+    
+        <form action="/students/getAllStudents">
+            <div class="col-sm-3">
+                <button type="buttom" class="btn btn-primary btn-block">Students List</button>
+            </div>
+        </form>
+    
+
+    <br>
+    <form action="/interviews/getAllInterviews">
+        <div class="col-sm-3">
+            <button type="button" class="btn btn-primary btn-block">Interviews List</button>
+        </div>
+    </form>
+<%}else{%>
+    <h1>Hiii, You can either SignIn Or Sign Up</h1>    
+<%}%>

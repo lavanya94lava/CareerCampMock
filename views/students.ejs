@@ -1,0 +1,42 @@
+<h1 class = "col-sm-4">
+    Add new Student Here
+</h1>
+
+<form action="/students/addStudent" method="POST">
+    <div class = "form-group">
+        <div class = "col-sm-4">
+            <label for="inputName">Name</label>
+            <input type="text" name="name" placeholder="Name" id = "inputName" class = "form-control"required>            
+        </div>
+    </div>
+    <div class = "form-group">
+        <div class = "col-sm-4">
+            <label for="inputBatch">Batch</label>
+            <input type="text" name="batch" placeholder="Batch" id = "inputBatch" class="form-control" required>
+        </div>
+    </div>
+    <div class = "form-group">
+        <div class = "col-sm-4">
+            <label for="inputCollege">College</label>
+            <input type="text" name="college" placeholder="College" id = "inputCollege" class="form-control" required>
+        </div>
+    </div>
+    <div class = "form-group">
+        <div class = "col-sm-4">
+            <label for="inputCourse">Course</label>
+            <input type="text" name="course" placeholder="Course" id = "inputCourse" class="form-control" required>
+        </div>
+    </div>
+    <div class = "form-group">
+        <div class = "col-sm-4">
+            <label for="inputStatus">Status</label>
+            <input type="text" name="status" placeholder="Status" id = "inputStatus" class="form-control" required>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-sm-4">
+            <button type = "submit" class="btn btn-primary">Add New Student</button>
+        </div>
+    </div>
+</form>

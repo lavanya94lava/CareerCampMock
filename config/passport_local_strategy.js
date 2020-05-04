@@ -15,30 +15,23 @@ passport.use(new localStratgy({
 },function(req,email,password, done){
     if (req.recaptcha.error) {
         req.flash("error","Captcha Error");
-        return res.redirect("back");
+        return;
     } 
     Employee.findOne({email:email},function(err, employee){
         if(err){
             req.flash('error',err);
             return done(err);
         }
-        bcrypt.compare(password,user.password,function(err,isMatch){
+        bcrypt.compare(password,employee.password,function(err){
             if(err){
                 req.flash("error", "Error in deciphering the password using bcrypt");
                 return done(err);
             }
-            if(isMatch){
-                if(employee.isVerified){
-                    return done(null, employee);
-                }
-                else{
-                    req.flash("error", "User is not verified, Please go to your mail and check");
-                    return done(null, false);
-                }
-            }
 
-            req.flash("error","Invalid Password or couldn't decipher it using bcypt");
-            return done(null,false);
+            return done(null, employee);
+
+            // req.flash("error","Invalid Password or couldn't decipher it using bcypt");
+            // return done(null,false);
         });
     })
 }));
@@ -55,7 +48,7 @@ passport.deserializeUser(function(id, done){
             console.log("Error in passport");
             return done(err);
         }
-        return done(null,user);
+        return done(null,employee);
     })
 });
 
@@ -71,7 +64,7 @@ passport.checkAuthentication = function(req, res, next){
 //set the user in locals so that we could use it for authentication purposes
 passport.setAuthenticatedUser = function(req,res,next){
     if(req.isAuthenticated()){
-        res.locals.employee = req.employee;
+        res.locals.employee = req.user;
     }
     next();
 }
