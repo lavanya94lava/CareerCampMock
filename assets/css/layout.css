@@ -7,6 +7,11 @@ body{
     color: black;
 }
 
+a{
+    color: brown;
+    text-decoration: underline;
+}
+
 a:hover{
     background-color:cornflowerblue;
     color: crimson;

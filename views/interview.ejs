@@ -1,5 +1,5 @@
 <h1 class = "col-sm-4">
-    Add new Interview Here
+    Add New Interview Here
 </h1>
 
 <form id = "add-interview-form" action="/interviews/addInterview" method="POST">
@@ -42,13 +42,19 @@
         </tr>
         </thead>
         <tbody>
-            <%for(let i=0;i<interviews.length;i++){%>
-                <tr>
-                    <th scope="row"><%= i+1%></th>
-                    <td><%= interviews[i].company %></td>
-                    <td><%= interviews[i].package %></td>
-                    <td><%= interviews[i].date %></td>
-                </tr>
+            <%if(interviews.length >0){%>
+                <%for(let i=0;i<interviews.length;i++){%>
+                    <tr>
+                        <th scope="row"><%= i+1%></th>
+                        <td><a href="/interviews/<%= interviews[i]._id%>"><%= interviews[i].company %></a></td>
+                        <td><%= interviews[i].package %></td>
+                        <td><%= interviews[i].date %></td>
+                    </tr>
+                <%}%>
+                
+            <%}else{%>
+                
+                <h3>No data to display</h3>
             <%}%>
         </tbody>
     

@@ -2,17 +2,17 @@
     <h1>Hiiiii, <%= employee.name%>, what do you want to view?</h1>
     <br>
     
-        <form action="/students/getAllStudents">
+        <form action="/students/getAllStudents" method="GET">
             <div class="col-sm-3">
-                <button type="buttom" class="btn btn-primary btn-block">Students List</button>
+                <button class="btn btn-primary btn-block">Students List</button>
             </div>
         </form>
     
 
     <br>
-    <form action="/interviews/getAllInterviews">
+    <form action="/interviews/getAllInterviews" method="GET">
         <div class="col-sm-3">
-            <button type="button" class="btn btn-primary btn-block">Interviews List</button>
+            <button class="btn btn-primary btn-block">Interviews List</button>
         </div>
     </form>
 <%}else{%>

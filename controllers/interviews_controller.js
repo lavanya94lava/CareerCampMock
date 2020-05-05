@@ -23,13 +23,14 @@ module.exports.showAllInterviews = async function(req,res){
 
 module.exports.addInterview = async function(req,res){
     try{
-        if(!req.body.company||!req.body.date){
+        if(!req.body.company||!req.body.date|| !req.body.package){
             req.flash("error", "Please fill all the fields");
             return res.redirect("back");
         }
 
         let addInterview = await Interview.create({
             company: req.body.company,
+            package:req.body.package,
             date: req.body.date,
         });
 
@@ -45,3 +46,36 @@ module.exports.addInterview = async function(req,res){
          return res.json({success: false,message:e.message});
     }
 }
+
+module.exports.viewInterview = async function(req,res){
+    try{
+        if(!req.isAuthenticated()){
+            req.flash("error", "please sign in before accessing this page");
+            return res.redirect("back");
+        }
+
+        console.log(req.params);
+        
+
+        let interview = await Interview.findById(req.params.id);
+
+        let students = await Student.find({});
+
+        let studentsArray  =  [];
+
+        for(let i=0;i<students.length;i++){
+            studentsArray.push(students[i].name);
+        }
+
+        if(req.xhr){
+
+            return res.json({success: true, message: "Congrats on autocompleting new student",studentsArray:studentsArray});
+        }
+
+        return res.render('viewInterview',{title: interview.company,interview:interview});
+    }
+    catch(e){
+        req.flash("error", "something went wrong in accessing interview using ID");
+        return res.json({success: false,message: "Catching the error here in viewInterview" +e.message});
+    }
+} 

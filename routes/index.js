@@ -8,6 +8,12 @@ router.get('/',(req,res)=>{
 //various routes for user
 router.use('/users',require("./users"));
 
+
+// routes for students
 router.use('/students',require("./students"));
+
+
+//routes for interviews
+router.use('/interviews',require("./interviews"));
 
 module.exports = router;
