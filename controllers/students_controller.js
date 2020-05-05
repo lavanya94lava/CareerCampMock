@@ -1,10 +1,58 @@
 // /this file contains all the students controllers, which perfoms functions like get all students or add new student etc.
 
+const Student = require("../models/Student");
+
 module.exports.showAllStudents = async function(req,res){
     try{
-        return res.render('students',{title:'Student'});
+        if(!req.isAuthenticated()){
+            req.flash("error", "please sign in before accessing this page");
+            return res.redirect("back");
+        } 
+        let students = await Student.find({});
+          
+        return res.render('students',{title:'Student', students:students});
     }
     catch(e){
         req.flash("error","something went wrong in fetching students");
+        return res.redirect("back");
+    }
+}
+
+
+module.exports.addStudent = async function(req,res){
+    try{
+
+        if(!req.body.name||!req.body.batch || !req.body.college || !req.body.status|| !req.body.DSA|| !req.body.WebD|| !req.body|| !req.body.React){
+            req.flash("error", "Please fill all the fields");
+            return res.redirect("back");
+        }
+
+        if(!Student.schema.path("status").enumValues.includes(req.body.status)){
+            req.flash("error", "Please fill status out of given");
+            return res.redirect("back");
+        }
+
+        let addStudent = await Student.create({
+            name: req.body.name,
+            batch: req.body.batch,
+            college: req.body.college,
+            status: req.body.status,
+            course:{
+                DSA: req.body.DSA,
+                WebD:req.body.WebD,
+                React: req.body.React
+            }
+        });
+
+        let students = await Student.find({});
+        
+        let studentsLength = students.length;
+
+        req.flash("success", "congrats on adding data using ajax");
+        return res.json({success: true, message: "Congrats on adding a new student", addStudent:addStudent, studentsLength:studentsLength});
+    }
+    catch(e){
+        req.flash("error","something went wrong in adding student");
+         return res.json({success: false,message:e.message});
     }
 }

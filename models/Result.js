@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const resultSchema = new mongoose.Schema({
     result:{
         type:String,
-        enum:['Pass','Fail', 'Not Attempted', 'On hold'],
+        enum:["Pass","Fail", "Didn't Attempt", "On hold"],
         required: true
     },
     student:{
@@ -16,6 +16,8 @@ const resultSchema = new mongoose.Schema({
         ref:'Interview',
         required: true
     }
+},{
+    timestamps:true
 });
 
 module.exports = mongoose.model('Result', resultSchema);

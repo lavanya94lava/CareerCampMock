@@ -7,4 +7,6 @@ const studentsController = require('../controllers/students_controller');
 
 router.get('/getAllStudents',studentsController.showAllStudents);
 
+router.post('/addStudent',studentsController.addStudent);
+
 module.exports = router;

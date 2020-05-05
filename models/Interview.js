@@ -9,10 +9,17 @@ const interviewSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    package:{
+        type:String,
+        required:true
+    }
+    ,
     students:[{
         type: mongoose.Schema.Types.ObjectId,
         ref:'Student'
     }]
+},{
+    timestamps:true
 });
 
 module.exports = mongoose.model('Interview',interviewSchema);

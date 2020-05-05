@@ -16,6 +16,8 @@ const employeeSchema = new mongoose.Schema({
         type: String,
         required: true
     }
+},{
+    timestamps:true
 });
 
 // / generating a hash
