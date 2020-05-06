@@ -53,29 +53,67 @@ module.exports.viewInterview = async function(req,res){
             req.flash("error", "please sign in before accessing this page");
             return res.redirect("back");
         }
-
-        console.log(req.params);
         
-
         let interview = await Interview.findById(req.params.id);
 
-        let students = await Student.find({});
+        let studentsArray = await Student.find({});
 
-        let studentsArray  =  [];
+        let students = [];
 
-        for(let i=0;i<students.length;i++){
-            studentsArray.push(students[i].name);
+        for(let i =0;i<interview.students.length;i++){
+            let student = await Student.findById(interview.students[i]);
+            students.push(student);
         }
-
+        
         if(req.xhr){
 
             return res.json({success: true, message: "Congrats on autocompleting new student",studentsArray:studentsArray});
         }
 
-        return res.render('viewInterview',{title: interview.company,interview:interview});
+        return res.render('viewInterview',{title: interview.company,interview:interview, students:students});
     }
     catch(e){
         req.flash("error", "something went wrong in accessing interview using ID");
-        return res.json({success: false,message: "Catching the error here in viewInterview" +e.message});
+        return res.json({success: false,message: "Catching the error here in viewInterview " +e.message});
     }
 } 
+
+
+module.exports.addStudentInterview = async function(req,res){
+    try{
+        if(!req.body.student){
+            req.flash("error", "Please fill all the fields");
+            return res.redirect("back");
+        }
+
+        let student = await Student.findById(req.body.student);
+
+        if(!student){
+            req.flash("error", "no such student exist");
+            return res.redirect("back");
+        }
+
+        let interview =  await Interview.findById(req.params.interviewId);
+
+        if(!interview){
+            req.flash("error", "no such interview exist");
+            return res.redirect("back");
+        }
+
+        interview.students.push(student);
+
+        await interview.save();
+
+        
+
+
+        let studentsLength = interview.students.length;
+
+        return res.json({success:true, message:"congrats on adding a new student to interview",student:student,studentsLength:studentsLength});
+        
+    }
+    catch(e){
+        req.flash("error", "something went wrong in adding student to interview using ID");
+        return res.json({success: false,message: "Catching the error here in addStudentInterview" +e.message});
+    }
+}

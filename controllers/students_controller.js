@@ -1,6 +1,7 @@
 // /this file contains all the students controllers, which perfoms functions like get all students or add new student etc.
 
 const Student = require("../models/Student");
+const Result = require("../models/Result");
 
 module.exports.showAllStudents = async function(req,res){
     try{
@@ -19,6 +20,7 @@ module.exports.showAllStudents = async function(req,res){
 }
 
 
+// add Student to the carrer camp report pages
 module.exports.addStudent = async function(req,res){
     try{
 
@@ -56,3 +58,6 @@ module.exports.addStudent = async function(req,res){
          return res.json({success: false,message:e.message});
     }
 }
+
+
+

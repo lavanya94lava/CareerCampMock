@@ -13,8 +13,7 @@ router.post('/addInterview',interviewsController.addInterview);
 //router to view a particular interview and its details
 router.get('/:id',interviewsController.viewInterview);
 
-
 // router to get students in autocomplete to add in interviews
-// router.get('/search_student',interviewsController.searchStudent);
+router.post('/:interviewId/addStudentInterview',interviewsController.addStudentInterview);
 
 module.exports = router;

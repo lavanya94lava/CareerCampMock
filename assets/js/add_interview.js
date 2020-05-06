@@ -38,9 +38,7 @@ let url = window.location.href;
 let id = url.substring(url.lastIndexOf('/') + 1);
 
 $("#inputStudent").autocomplete({
-    maxResults:5,
     source: function (request, response) {
-        console.log(request);
        $.ajax({
           url: `/interviews/${id}`,
           type: "GET",
@@ -49,12 +47,13 @@ $("#inputStudent").autocomplete({
                 request.term = request.term.toLowerCase();
                 let matches =[];
                 for(let i = 0;i< data.studentsArray.length;i++){
-                    if (~data.studentsArray[i].toLowerCase().indexOf(request.term)) matches.push(data.studentsArray[i]);
+                    if (~data.studentsArray[i].name.toLowerCase().indexOf(request.term)) matches.push(data.studentsArray[i]);
                 }
                 response($.map(matches,function(value){
                     return {
-                        label: value,
-                        value: value,
+                        label: value.name,
+                        batch:value.batch,
+                        value: value._id,
                     };
                 }));
             }
@@ -72,11 +71,36 @@ $("#inputStudent").autocomplete({
        },
        select: function (event, ui) {
           // Prevent value from being put in the input:
-          this.value = ui.item.label;
-          // Set the id to the next input hidden field
-          $(this).next("input").val(ui.item.value);
-          // Prevent other event from not being execute            
+          this.value = ui.item.value;   
           event.preventDefault();
        }
 });
-  
+
+$('#add-student-interview').submit(function(e){
+    e.preventDefault();
+
+    $.ajax({
+        method:'POST',
+        url:`/interviews/${id}/addStudentInterview`,
+        data: $('#add-student-interview').serialize(),
+        success: function(data){
+            let newStudentInterview = newStudentInterviewDom(data.student, data.studentsLength);
+            $('.table').append(newStudentInterview);
+        },
+        error: function(error){
+            console.log(error.responseText);
+        }
+    });
+});
+
+let newStudentInterviewDom = function(student, studentsLength){
+    return $(`
+            <tr>
+            <th scope="row">${studentsLength}</th>
+            <td>${student.name}</td>
+            <td>${student.batch}</td>
+            <td>${student.college}</td>
+            <td></td>
+            </tr>
+             `);
+}

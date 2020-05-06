@@ -16,4 +16,7 @@ router.use('/students',require("./students"));
 //routes for interviews
 router.use('/interviews',require("./interviews"));
 
+//routes for getting or updating results
+router.use('/results',require("./results"));
+
 module.exports = router;
