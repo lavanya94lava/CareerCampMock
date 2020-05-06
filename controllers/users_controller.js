@@ -5,6 +5,9 @@ const bcrypt = require('bcryptjs');
 
 //sign up form
 module.exports.signUp = function(req,res){
+    if(req.isAuthenticated()){
+        return res.redirect('/');
+    }
     return res.render('sign_up',{
         recaptcha: res.recaptcha,
         title:"Sign Up"
@@ -13,6 +16,9 @@ module.exports.signUp = function(req,res){
 
 //sign in form
 module.exports.signIn = function(req,res){
+    if(req.isAuthenticated()){
+        return res.redirect('/');
+    }
     return res.render('sign_in',{
         recaptcha: res.recaptcha,
         title:"Sign In"

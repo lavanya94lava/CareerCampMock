@@ -44,14 +44,17 @@
                     <td><%= students[i].batch %></td>
                     <td><%= students[i].college %></td>
                     <td>
-                        <form action="/results/<%= students[i]._id%>" method = "POST"> 
+                        <form id = "update-student-form" action="/results/updateStudent" method = "POST"> 
+                            <input class = "studentId" type="hidden" name = "studentId" value = "<%= students[i]._id%>">
+                            <input class = "interviewId" type="hidden" name = "interviewId" value = "<%= interview._id%>">
                             <select class="selectpicker" data-style="btn-info" name="selectpicker">   
                                 <option value="" disabled>Select Status</option>     
-                                <option value="0">Didn't Attempt</option>
-                                <option value="1">Pass</option>
-                                <option value="2">Fail</option>
-                                <option value="3">On Hold</option>
+                                <option value="Did Not Attempt">Did Not Attempt</option>
+                                <option value="Pass">Pass</option>
+                                <option value="Fail">Fail</option>
+                                <option value="On Hold">On Hold</option>
                             </select>
+                            
                         </form>
                     </td>
                 </tr>

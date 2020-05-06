@@ -6,6 +6,6 @@ const resultsController = require("../controllers/results_controller");
 
 
 // method for posting result of an interview
-router.post('/:studentId',resultsController.updateStudentResult);
+router.post('/updateStudent',resultsController.updateStudentResult);
 
 module.exports = router;

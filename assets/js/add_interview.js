@@ -96,11 +96,41 @@ $('#add-student-interview').submit(function(e){
 let newStudentInterviewDom = function(student, studentsLength){
     return $(`
             <tr>
-            <th scope="row">${studentsLength}</th>
-            <td>${student.name}</td>
-            <td>${student.batch}</td>
-            <td>${student.college}</td>
-            <td></td>
+                <th scope="row">${studentsLength}</th>
+                <td>${student.name}</td>
+                <td>${student.batch}</td>
+                <td>${student.college}</td>
+                <td>
+                <form id = "update-student-form" action="/results/updateStudent" method = "POST"> 
+                <input class = "studentId" type="hidden" name = "studentId" value = ${student._id}>
+                <input class = "interviewId" type="hidden" name = "interviewId" value = ${id}>
+                <select class="selectpicker" data-style="btn-info" name="selectpicker">   
+                    <option value="" disabled>Select Status</option>     
+                    <option value="Did Not Attempt">Did Not Attempt</option>
+                    <option value="Pass">Pass</option>
+                    <option value="Fail">Fail</option>
+                    <option value="On Hold">On Hold</option>
+                </select>
+                
+            </form>
+                </td>
             </tr>
              `);
-}
+    }
+    
+
+    $('#update-student-form').on("change",function(e){
+    e.preventDefault();
+    $.ajax({
+        method:"post",
+        url:"/results/updateStudent",
+        data:$('#update-student-form').serialize(),
+        success:function(data){
+            console.log(data);
+        },
+        error: function(error){
+            console.log(error.responseText);
+        }
+    });
+});
+

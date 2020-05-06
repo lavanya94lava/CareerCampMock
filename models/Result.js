@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const resultSchema = new mongoose.Schema({
     result:{
         type:String,
-        enum:["Pass","Fail", "Didn't Attempt", "On hold"],
+        enum:["Pass","Fail", "Did Not Attempt", "On Hold"],
         required: true
     },
     student:{
