@@ -1,0 +1,28 @@
+STUDENT_ID,STUDENT_NAME,STUDENT_BATCH,STUDENT_COLLEGE,STUDENT_STATUS,DSA_SCORE,WebD_SCORE,REACT_SCORE,INTERVIEW_DATE,INTERVIEW_NAME,INTERVIEW_RESULT
+5eb301aa5cb0d56fc16cc259,Lavanya Singh,October,DTU,Placed,95,95,95,Sat May 23 2020 05:30:00 GMT+0530 (IST),Microsoft,On Hold
+5eb301995cb0d56fc16cc258,Ayush,October,IIT,Placed,100,100,100,Sat May 23 2020 05:30:00 GMT+0530 (IST),Microsoft,Fail
+5eb30430b1a9b972893d52d5,Vibhav,November,NIEC,Not Placed,79,54,52,Sat May 23 2020 05:30:00 GMT+0530 (IST),Microsoft,Pass
+5eb30423b1a9b972893d52d3,abhi,November,JP,Not Placed,50,50,50,Sat May 23 2020 05:30:00 GMT+0530 (IST),Microsoft,Fail
+5eb40c57596dd56f09a14618,ShahRukh Khan,March,HansRaj,Placed,89,75,78,Sat May 23 2020 05:30:00 GMT+0530 (IST),Microsoft,Did Not Attempt
+5eb301aa5cb0d56fc16cc259,Lavanya Singh,October,DTU,Placed,95,95,95,Sat May 23 2020 05:30:00 GMT+0530 (IST),Microsoft,On Hold
+5eb301aa5cb0d56fc16cc259,Lavanya Singh,October,DTU,Placed,95,95,95,Sat May 23 2020 05:30:00 GMT+0530 (IST),Microsoft,On Hold
+5eb30430b1a9b972893d52d5,Vibhav,November,NIEC,Not Placed,79,54,52,Sat May 23 2020 05:30:00 GMT+0530 (IST),Microsoft,Pass
+5eb301995cb0d56fc16cc258,Ayush,October,IIT,Placed,100,100,100,Sat May 23 2020 05:30:00 GMT+0530 (IST),Microsoft,Fail
+5eb301aa5cb0d56fc16cc259,Lavanya Singh,October,DTU,Placed,95,95,95,Sun May 24 2020 05:30:00 GMT+0530 (IST),ixigo,Did Not Attempt
+5eb40c57596dd56f09a14618,ShahRukh Khan,March,HansRaj,Placed,89,75,78,Sun May 24 2020 05:30:00 GMT+0530 (IST),ixigo,Did Not Attempt
+5eb301995cb0d56fc16cc258,Ayush,October,IIT,Placed,100,100,100,Sun May 24 2020 05:30:00 GMT+0530 (IST),ixigo,Did Not Attempt
+5eb30423b1a9b972893d52d3,abhi,November,JP,Not Placed,50,50,50,Sun May 24 2020 05:30:00 GMT+0530 (IST),ixigo,Did Not Attempt
+5eb40c57596dd56f09a14618,ShahRukh Khan,March,HansRaj,Placed,89,75,78,Fri May 29 2020 05:30:00 GMT+0530 (IST),SnapChat,Did Not Attempt
+5eb301aa5cb0d56fc16cc259,Lavanya Singh,October,DTU,Placed,95,95,95,Fri May 29 2020 05:30:00 GMT+0530 (IST),SnapChat,Did Not Attempt
+5eb301995cb0d56fc16cc258,Ayush,October,IIT,Placed,100,100,100,Fri May 29 2020 05:30:00 GMT+0530 (IST),SnapChat,Did Not Attempt
+5eb30418b1a9b972893d52d2,ajay,November,Galgotia,Not Placed,50,50,50,Fri May 29 2020 05:30:00 GMT+0530 (IST),SnapChat,Fail
+5eb301aa5cb0d56fc16cc259,Lavanya Singh,October,DTU,Placed,95,95,95,Thu May 21 2020 05:30:00 GMT+0530 (IST),Paytm,Did Not Attempt
+5eb40c57596dd56f09a14618,ShahRukh Khan,March,HansRaj,Placed,89,75,78,Thu May 21 2020 05:30:00 GMT+0530 (IST),Paytm,Did Not Attempt
+5eb301995cb0d56fc16cc258,Ayush,October,IIT,Placed,100,100,100,Thu May 21 2020 05:30:00 GMT+0530 (IST),Paytm,Did Not Attempt
+5eb30423b1a9b972893d52d3,abhi,November,JP,Not Placed,50,50,50,Thu May 21 2020 05:30:00 GMT+0530 (IST),Paytm,Did Not Attempt
+5eb40c57596dd56f09a14618,ShahRukh Khan,March,HansRaj,Placed,89,75,78,Thu May 21 2020 05:30:00 GMT+0530 (IST),Paytm,Did Not Attempt
+5eb40c57596dd56f09a14618,ShahRukh Khan,March,HansRaj,Placed,89,75,78,Thu May 21 2020 05:30:00 GMT+0530 (IST),Paytm,Did Not Attempt
+5eb30430b1a9b972893d52d5,Vibhav,November,NIEC,Not Placed,79,54,52,Thu May 21 2020 05:30:00 GMT+0530 (IST),Paytm,Did Not Attempt
+5eb30423b1a9b972893d52d3,abhi,November,JP,Not Placed,50,50,50,Thu May 21 2020 05:30:00 GMT+0530 (IST),Paytm,Did Not Attempt
+5eb301aa5cb0d56fc16cc259,Lavanya Singh,October,DTU,Placed,95,95,95,Thu May 21 2020 05:30:00 GMT+0530 (IST),Paytm,Did Not Attempt
+5eb301aa5cb0d56fc16cc259,Lavanya Singh,October,DTU,Placed,95,95,95,Thu May 21 2020 05:30:00 GMT+0530 (IST),Paytm,Did Not Attempt

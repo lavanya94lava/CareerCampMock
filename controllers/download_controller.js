@@ -22,7 +22,7 @@ const csvWriter = createCsvWriter({
         { id: 'company', title: 'INTERVIEW_NAME' },
         { id: 'result', title: 'INTERVIEW_RESULT' }
     ],
-    path:'./downloadFile/data.csv'
+    path: path.join(__dirname,'..','/downloadFile','data.csv')
 });
 
 module.exports.downloadableFile = async function(req,res){
@@ -34,7 +34,6 @@ module.exports.downloadableFile = async function(req,res){
         for(let i=0;i<interviews.length;i++){
             for(let j=0;j<interviews[i].students.length;j++){
                 let student = await Student.findById(interviews[i].students[j]);
-                console.log("reaching downloads controller-->", student);
                  await Result.findOne({interview:interviews[i]._id,
                      student: interviews[i].students[j]},
                      function(err,result){
@@ -46,26 +45,30 @@ module.exports.downloadableFile = async function(req,res){
                             res = "Did Not Attempt"
                         }
                         else{
-                            res = result;
+                            res = result.result;
                             console.log("Yes there are results to show-->", res);
                         }
+                        const records = [{
+                            id:student._id, name:student.name, batch:student.batch, college:student.college, status:student.status, DSA: student.course.DSA, WebD:student.course.WebD, React: student.course.React, date:interviews[i].date, company: interviews[i].company, result:res
+                        }];
+                        console.log("reaching results", records);
+                        csvWriter.writeRecords(records).then(()=>console.log("congrats on successfully making the csv"));
                      });
-                console.log("reaching results", result);
-
-                const records = [{
-                    id:student._id, name:student.name, batch:student.batch, college:student.college, status:student.status, DSA: student.course.DSA, WebD:student.course.WebD, React: student.course.React, date:interviews[i].date, company: interviews[i].company, result:res
-                }];
-
-                csvWriter.writeRecords(records).then(()=>console.log("congrats on successfully making the csv"));
             }
         }
 
-        let file = path.join('./downloadFile','data.csv');
-        res.download(file,'data.csv');
+        console.log("path is -->", path.join(__dirname,'..','downloadFile','data.csv'));
+         res.download(path.join(__dirname,'..','downloadFile'),'data.csv',function(err,success){
+             if(err){
+                 req.flash("error","cannot download file");
+                 console.log("error is ", err);
+             }
+         });
+
     }
     catch(e){
         req.flash("error","error in creating downloadble file");
         console.log("error in creating downloadble file");
-        return;
+        return res.redirect("back");
     }
 }

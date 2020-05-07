@@ -21,6 +21,8 @@ app.set('view engine', 'ejs');
 
 app.set('views',path.join(__dirname,'views'));
 
+app.use('/downloadFile',express.static(__dirname+'/downloadFile'));
+
 app.use(express.static(__dirname+'/assets'));
 
 app.use(express.urlencoded());
