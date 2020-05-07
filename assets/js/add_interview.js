@@ -96,14 +96,14 @@ $('#add-student-interview').submit(function(e){
 let newStudentInterviewDom = function(student, studentsLength){
     return $(`
             <tr>
+            <form id = "update-student-form" action="/results/${interview._id}/ ${students[i]._id}" method = "POST"> 
                 <th scope="row">${studentsLength}</th>
                 <td>${student.name}</td>
                 <td>${student.batch}</td>
                 <td>${student.college}</td>
                 <td>
-                <form id = "update-student-form" action="/results/updateStudent" method = "POST"> 
-                <input class = "studentId" type="hidden" name = "studentId" value = ${student._id}>
-                <input class = "interviewId" type="hidden" name = "interviewId" value = ${id}>
+                <input id = "studentId" type="hidden" name = "studentId" value = ${student._id}>
+                <input id = "interviewId" type="hidden" name = "interviewId" value = ${id}>
                 <select class="selectpicker" data-style="btn-info" name="selectpicker">   
                     <option value="" disabled>Select Status</option>     
                     <option value="Did Not Attempt">Did Not Attempt</option>
@@ -111,22 +111,25 @@ let newStudentInterviewDom = function(student, studentsLength){
                     <option value="Fail">Fail</option>
                     <option value="On Hold">On Hold</option>
                 </select>
-                
-            </form>
                 </td>
+                <td>
+                        <button class="btn btn-primary btn-block">Update</button>
+                </td>
+                </form>
             </tr>
              `);
     }
     
 
-    $('#update-student-form').on("change",function(e){
+    $('#update-student-form').submit(function(e){
     e.preventDefault();
+    let studentId = $("#update-student-form .studentId").val();
     $.ajax({
         method:"post",
-        url:"/results/updateStudent",
+        url:`/results/${id}/${studentId}`,
         data:$('#update-student-form').serialize(),
         success:function(data){
-            console.log(data);
+            let selectValue = data.result.result;
         },
         error: function(error){
             console.log(error.responseText);

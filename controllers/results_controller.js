@@ -9,13 +9,13 @@ module.exports.updateStudentResult = async function(req,res){
     try{
 
         console.log("selectpicker is -->",req.body.selectpicker);
-        console.log(Result.schema.path('result').enumValues);
+        console.log("req.params -->",req.params);
         if(!Result.schema.path('result').enumValues.includes(req.body.selectpicker)){
             console.log("please heck enum values");
             throw new Error('Result Status Value is not Valid.');
         }
 
-        let student = await Student.findById(req.body.studentId);
+        let student = await Student.findById(req.params.studentId);
 
         console.log("student is -->",student);
         if(!student){
@@ -24,9 +24,8 @@ module.exports.updateStudentResult = async function(req,res){
         }
 
         await Result.findOne({
-            student:req.body.studentId
+            student:req.params.studentId
         },function(err, result){
-            console.log("result is --->",result);
             if(err){
                 console.log("error in finding the student");
                 return;
@@ -34,21 +33,18 @@ module.exports.updateStudentResult = async function(req,res){
             if(!result){
                 let result = Result.create({
                     result: req.body.selectpicker,
-                    interview: req.body.interviewId,
-                    student: req.body.studentId
+                    interview: req.params.interviewId,
+                    student: req.params.studentId
                 });
                 if(!result){
                     console.log("error in creating result");
                     return;
                 }
-
-                console.log("result created is ",result);
                 return res.json({success:true,result:result});
 
             }
             else{
                 result.result = req.body.selectpicker;
-                console.log("updated result is -->", result);
                 result.save();
                 return res.json({success:true, result:result});
             }

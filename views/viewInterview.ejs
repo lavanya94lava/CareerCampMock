@@ -33,30 +33,33 @@
         <th scope="col">Batch</th>
         <th scope="col">College</th>
         <th scope="col">Result</th>
+        <th scope="col">Update</th>
     </tr>
     </thead>
     <tbody>
         <%if(students.length >0){%>
             <%for(let i=0;i<students.length;i++){%>
                 <tr>
+                <form class = "update-student-form" action="/results/<%= interview._id%>/<%= students[i]._id%>" method = "POST">
                     <th scope="row"><%= i+1%></th>
                     <td><%= students[i].name %></td>
                     <td><%= students[i].batch %></td>
                     <td><%= students[i].college %></td>
                     <td>
-                        <form id = "update-student-form" action="/results/updateStudent" method = "POST"> 
                             <input class = "studentId" type="hidden" name = "studentId" value = "<%= students[i]._id%>">
                             <input class = "interviewId" type="hidden" name = "interviewId" value = "<%= interview._id%>">
                             <select class="selectpicker" data-style="btn-info" name="selectpicker">   
-                                <option value="" disabled>Select Status</option>     
+                                <option value="<%= studentResult[students[i]._id].result%>"><%= studentResult[students[i]._id].result%></option>     
                                 <option value="Did Not Attempt">Did Not Attempt</option>
                                 <option value="Pass">Pass</option>
                                 <option value="Fail">Fail</option>
                                 <option value="On Hold">On Hold</option>
-                            </select>
-                            
-                        </form>
+                            </select>  
                     </td>
+                    <td>
+                        <button class="btn btn-primary btn-block">Update</button>
+                    </td>
+                </form>
                 </tr>
             <%}%>
             

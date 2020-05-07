@@ -60,17 +60,28 @@ module.exports.viewInterview = async function(req,res){
 
         let students = [];
 
+        let studentResult  = {};
         for(let i =0;i<interview.students.length;i++){
             let student = await Student.findById(interview.students[i]);
             students.push(student);
+            let result = await Result.findOne({student:student},
+                    function(err,result){
+                        if(!result){
+                            studentResult[student._id] = "Did Not Attempt";  
+                        }
+                        else{
+                            studentResult[student._id] = result;
+                        }
+                    }
+            );
         }
-        
+        // console.log("ResultLog-->", studentResult);
         if(req.xhr){
 
             return res.json({success: true, message: "Congrats on autocompleting new student",studentsArray:studentsArray});
         }
 
-        return res.render('viewInterview',{title: interview.company,interview:interview, students:students});
+        return res.render('viewInterview',{title: interview.company,interview:interview, students:students,studentResult:studentResult});
     }
     catch(e){
         req.flash("error", "something went wrong in accessing interview using ID");
