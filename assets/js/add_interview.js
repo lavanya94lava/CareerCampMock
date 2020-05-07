@@ -25,7 +25,7 @@ let newInterviewDom = function(interview, interviewsLength){
     return $(`
             <tr>
             <th scope="row">${interviewsLength}</th>
-            <td><a href = "/interview/${interview._id}">${interview.company}</a></td>
+            <td><a href = "/interviews/${interview._id}">${interview.company}</a></td>
             <td>${interview.package}</td>
             <td>${interview.date}</td>
             </tr>
@@ -96,16 +96,15 @@ $('#add-student-interview').submit(function(e){
 let newStudentInterviewDom = function(student, studentsLength){
     return $(`
             <tr>
-            <form id = "update-student-form" action="/results/${interview._id}/ ${students[i]._id}" method = "POST"> 
+            <form id = "update-student-form" action="/results/${id}/${student._id}" method = "POST"> 
                 <th scope="row">${studentsLength}</th>
                 <td>${student.name}</td>
                 <td>${student.batch}</td>
                 <td>${student.college}</td>
                 <td>
-                <input id = "studentId" type="hidden" name = "studentId" value = ${student._id}>
-                <input id = "interviewId" type="hidden" name = "interviewId" value = ${id}>
-                <select class="selectpicker" data-style="btn-info" name="selectpicker">   
-                    <option value="" disabled>Select Status</option>     
+                <input class = "studentId" type="hidden" name = "studentId" value = ${student._id}>
+                <input class = "interviewId" type="hidden" name = "interviewId" value = ${id}>
+                <select class="selectpicker" data-style="btn-info" name="selectpicker">        
                     <option value="Did Not Attempt">Did Not Attempt</option>
                     <option value="Pass">Pass</option>
                     <option value="Fail">Fail</option>
@@ -113,7 +112,7 @@ let newStudentInterviewDom = function(student, studentsLength){
                 </select>
                 </td>
                 <td>
-                        <button class="btn btn-primary btn-block">Update</button>
+                        <button type = "submit" class="btn btn-primary btn-block">Update</button>
                 </td>
                 </form>
             </tr>
@@ -129,7 +128,10 @@ let newStudentInterviewDom = function(student, studentsLength){
         url:`/results/${id}/${studentId}`,
         data:$('#update-student-form').serialize(),
         success:function(data){
-            let selectValue = data.result.result;
+            $("#button-btn").text("updating "+data.success);
+            setTimeout(()=>{
+                $("#button-btn").text("updated");
+            },1000);
         },
         error: function(error){
             console.log(error.responseText);

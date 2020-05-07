@@ -19,4 +19,8 @@ router.use('/interviews',require("./interviews"));
 //routes for getting or updating results
 router.use('/results',require("./results"));
 
+
+//route for downloading the file
+router.use('/download', require("./download"));
+
 module.exports = router;

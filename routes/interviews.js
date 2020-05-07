@@ -10,6 +10,7 @@ router.get('/getAllInterviews',interviewsController.showAllInterviews);
 // route to post a new interview to the list
 router.post('/addInterview',interviewsController.addInterview);
 
+
 //router to view a particular interview and its details
 router.get('/:id',interviewsController.viewInterview);
 

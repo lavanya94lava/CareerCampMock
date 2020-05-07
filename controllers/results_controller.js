@@ -8,8 +8,7 @@ const Result = require("../models/Result");
 module.exports.updateStudentResult = async function(req,res){
     try{
 
-        console.log("selectpicker is -->",req.body.selectpicker);
-        console.log("req.params -->",req.params);
+        console.log("req params is", req.params);
         if(!Result.schema.path('result').enumValues.includes(req.body.selectpicker)){
             console.log("please heck enum values");
             throw new Error('Result Status Value is not Valid.');
@@ -17,7 +16,6 @@ module.exports.updateStudentResult = async function(req,res){
 
         let student = await Student.findById(req.params.studentId);
 
-        console.log("student is -->",student);
         if(!student){
             console.log("no student found");
             throw new Error('Student not found.');
@@ -40,13 +38,13 @@ module.exports.updateStudentResult = async function(req,res){
                     console.log("error in creating result");
                     return;
                 }
-                return res.json({success:true,result:result});
+                return res.json({success:true,message:"congrats on adding a new student",result:result});
 
             }
             else{
                 result.result = req.body.selectpicker;
                 result.save();
-                return res.json({success:true, result:result});
+                return res.json({success:true, message:"congrats on updating a new student",result:result});
             }
 
         });

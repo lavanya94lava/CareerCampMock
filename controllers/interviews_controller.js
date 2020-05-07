@@ -64,7 +64,7 @@ module.exports.viewInterview = async function(req,res){
         for(let i =0;i<interview.students.length;i++){
             let student = await Student.findById(interview.students[i]);
             students.push(student);
-            let result = await Result.findOne({student:student},
+             await Result.findOne({student:student},
                     function(err,result){
                         if(!result){
                             studentResult[student._id] = "Did Not Attempt";  
@@ -112,11 +112,10 @@ module.exports.addStudentInterview = async function(req,res){
         }
 
         interview.students.push(student);
+        student.interviews.push(interview);
 
         await interview.save();
-
-        
-
+        await student.save();
 
         let studentsLength = interview.students.length;
 
