@@ -1,3 +1,5 @@
+//this file contains schema for results, contains a mapping between student and interview
+
 const mongoose = require('mongoose');
 
 const resultSchema = new mongoose.Schema({

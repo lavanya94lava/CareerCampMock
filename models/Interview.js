@@ -1,3 +1,5 @@
+//this file contains schema for interviews
+
 const mongoose = require('mongoose');
 
 const interviewSchema = new mongoose.Schema({

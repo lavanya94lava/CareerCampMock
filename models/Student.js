@@ -1,3 +1,5 @@
+//this file contains schema for students, contains all the details and an array of interviews
+
 const mongoose = require('mongoose');
 
 const studentSchema = new mongoose.Schema({

@@ -4,16 +4,16 @@ const Student = require("../models/Student");
 const Result = require("../models/Result");
 
 //this function lets you update student details during placement, like pass, fail etc.
-
+// we are getting dynamic data through params 
 module.exports.updateStudentResult = async function(req,res){
     try{
-
         console.log("req params is", req.params);
         if(!Result.schema.path('result').enumValues.includes(req.body.selectpicker)){
             console.log("please heck enum values");
             throw new Error('Result Status Value is not Valid.');
         }
 
+        //find the student whose result you want to update/create
         let student = await Student.findById(req.params.studentId);
 
         if(!student){
@@ -21,6 +21,8 @@ module.exports.updateStudentResult = async function(req,res){
             throw new Error('Student not found.');
         }
 
+
+        //find the result of the student if it exists otherwise update it
         await Result.findOne({
             student:req.params.studentId
         },function(err, result){

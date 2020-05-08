@@ -6,6 +6,7 @@ const Result = require("../models/Result");
 
 const path = require('path');
 
+//csvwriter library to write out data in csv format
 const createCsvWriter = require('csv-writer').createObjectCsvWriter;
 
 const csvWriter = createCsvWriter({
@@ -25,12 +26,19 @@ const csvWriter = createCsvWriter({
     path: path.join(__dirname,'..','/downloadFile','data.csv')
 });
 
+//this controller will give us a csv file and will enable it to download 
 module.exports.downloadableFile = async function(req,res){
     try{
+
+        if(!req.isAuthenticated()){
+            req.flash("error", "please sign in before accessing this page");
+            return res.redirect("back");
+        } 
 
         let interviews = await Interview.find({});
 
         let res = -1;
+        // getting all the interviews and students by looping on each student and each interview
         for(let i=0;i<interviews.length;i++){
             for(let j=0;j<interviews[i].students.length;j++){
                 let student = await Student.findById(interviews[i].students[j]);
@@ -58,7 +66,9 @@ module.exports.downloadableFile = async function(req,res){
         }
 
         console.log("path is -->", path.join(__dirname,'..','downloadFile','data.csv'));
-         res.download(path.join(__dirname,'..','downloadFile'),'data.csv',function(err,success){
+        
+        // res.download is a helper function by express to download a file present on our local file
+         res.download(path.join('./downloadFile','data.csv'),'data.csv',function(err,success){
              if(err){
                  req.flash("error","cannot download file");
                  console.log("error is ", err);
@@ -67,7 +77,6 @@ module.exports.downloadableFile = async function(req,res){
 
     }
     catch(e){
-        req.flash("error","error in creating downloadble file");
         console.log("error in creating downloadble file");
         return res.redirect("back");
     }

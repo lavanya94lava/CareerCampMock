@@ -1,5 +1,6 @@
 //method to submit to send data using ajax
 
+// add new student in the list without refreshing the page
 $('#add-student-form').submit(function(e){
     e.preventDefault();
 

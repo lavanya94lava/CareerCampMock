@@ -4,14 +4,17 @@ const Interview = require('../models/Interview');
 const Result = require('../models/Result');
 const Student = require('../models/Student');
 
+// get the list of all the interviews being lined up.
 module.exports.showAllInterviews = async function(req,res){
     try{
+        //check for user authentication
         if(!req.isAuthenticated()){
             req.flash("error", "please sign in before accessing this page");
             return res.redirect("back");
         } 
         let interviews = await Interview.find({});
                     
+        // render the ejs file
         return res.render('interview',{title:'Interview',interviews:interviews });
     }
     catch(e){
@@ -21,24 +24,27 @@ module.exports.showAllInterviews = async function(req,res){
 }
 
 
+// function to add 
 module.exports.addInterview = async function(req,res){
     try{
+        // check if user has filled all the values in form
         if(!req.body.company||!req.body.date|| !req.body.package){
             req.flash("error", "Please fill all the fields");
             return res.redirect("back");
         }
 
+        // if all works, create an interview
         let addInterview = await Interview.create({
             company: req.body.company,
             package:req.body.package,
             date: req.body.date,
         });
 
+        // send this data for ajax call purposes
         let interviews = await Interview.find({});
         
         let interviewsLength = interviews.length;
 
-        req.flash("success", "congrats on adding data using ajax");
         return res.json({success: true, message: "Congrats on adding a new interview", addInterview:addInterview, interviewsLength:interviewsLength});
     }
     catch(e){
@@ -47,19 +53,25 @@ module.exports.addInterview = async function(req,res){
     }
 }
 
+//view the details of an interview, like a list of all the students who are a part of it and for company make the details available
 module.exports.viewInterview = async function(req,res){
     try{
+        //check for user authentication
         if(!req.isAuthenticated()){
             req.flash("error", "please sign in before accessing this page");
             return res.redirect("back");
         }
         
+        //dynamic data to be sent using params in request
         let interview = await Interview.findById(req.params.id);
 
+        // find all the students to send it using ajax autocomplete method
         let studentsArray = await Student.find({});
 
+        // create students array to send onlty those students presnt in the interview list
         let students = [];
 
+        //create an object for student and its result mapping and sending it to render in autopopulate the dropdown/selectpicker
         let studentResult  = {};
         for(let i =0;i<interview.students.length;i++){
             let student = await Student.findById(interview.students[i]);
@@ -77,10 +89,11 @@ module.exports.viewInterview = async function(req,res){
         }
         // console.log("ResultLog-->", studentResult);
         if(req.xhr){
-
+            //used for autocomplete
             return res.json({success: true, message: "Congrats on autocompleting new student",studentsArray:studentsArray});
         }
 
+        //used for ejs 
         return res.render('viewInterview',{title: interview.company,interview:interview, students:students,studentResult:studentResult});
     }
     catch(e){
@@ -90,6 +103,7 @@ module.exports.viewInterview = async function(req,res){
 } 
 
 
+//this function is used for adding student in the interview section 
 module.exports.addStudentInterview = async function(req,res){
     try{
         if(!req.body.student){
@@ -104,6 +118,7 @@ module.exports.addStudentInterview = async function(req,res){
             return res.redirect("back");
         }
 
+        //dynamic data of interview is being sent through params
         let interview =  await Interview.findById(req.params.interviewId);
 
         if(!interview){
@@ -111,6 +126,7 @@ module.exports.addStudentInterview = async function(req,res){
             return res.redirect("back");
         }
 
+        //update interview as well as students model
         interview.students.push(student);
         student.interviews.push(interview);
 
@@ -119,6 +135,7 @@ module.exports.addStudentInterview = async function(req,res){
 
         let studentsLength = interview.students.length;
 
+        //ajax calls
         return res.json({success:true, message:"congrats on adding a new student to interview",student:student,studentsLength:studentsLength});
         
     }

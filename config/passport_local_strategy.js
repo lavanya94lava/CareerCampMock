@@ -52,7 +52,7 @@ passport.deserializeUser(function(id, done){
     })
 });
 
-
+//check for authentication of a user
 passport.checkAuthentication = function(req, res, next){
     if(req.isAuthenticated()){
         return next();

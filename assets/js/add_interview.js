@@ -1,8 +1,8 @@
-//method to submit to send data using ajax
-
+//this file contains javascript methods for various interview methods mostly using AJAX 
 
 let studentsArray = [];
 
+//add a new inteview details as a hyperlink so that it could open in a new page with details .
 $('#add-interview-form').submit(function(e){
     e.preventDefault();
 
@@ -37,6 +37,8 @@ let newInterviewDom = function(interview, interviewsLength){
 let url = window.location.href;
 let id = url.substring(url.lastIndexOf('/') + 1);
 
+
+// this function is used for autocomplete on the same page
 $("#inputStudent").autocomplete({
     source: function (request, response) {
        $.ajax({
@@ -76,6 +78,7 @@ $("#inputStudent").autocomplete({
        }
 });
 
+// add a new student to the list of a particular company, for that we send interview id in params
 $('#add-student-interview').submit(function(e){
     e.preventDefault();
 
@@ -92,6 +95,7 @@ $('#add-student-interview').submit(function(e){
         }
     });
 });
+
 
 let newStudentInterviewDom = function(student, studentsLength){
     return $(`
@@ -119,7 +123,7 @@ let newStudentInterviewDom = function(student, studentsLength){
              `);
     }
     
-
+//this method is used for updating the student value after you change the value in dropdown 
     $('#update-student-form').submit(function(e){
     e.preventDefault();
     let studentId = $("#update-student-form .studentId").val();

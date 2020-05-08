@@ -5,10 +5,12 @@ const Result = require("../models/Result");
 
 module.exports.showAllStudents = async function(req,res){
     try{
+        //if user not signed in then return to the same route from which it is coming
         if(!req.isAuthenticated()){
             req.flash("error", "please sign in before accessing this page");
             return res.redirect("back");
         } 
+        //show all students present in DB and populate our page
         let students = await Student.find({});
           
         return res.render('students',{title:'Student', students:students});
@@ -29,11 +31,13 @@ module.exports.addStudent = async function(req,res){
             return res.redirect("back");
         }
 
+        //check for values coming in and match it with enum values
         if(!Student.schema.path("status").enumValues.includes(req.body.status)){
             req.flash("error", "Please fill status out of given");
             return res.redirect("back");
         }
 
+        //if all works create a student.
         let addStudent = await Student.create({
             name: req.body.name,
             batch: req.body.batch,
@@ -46,6 +50,7 @@ module.exports.addStudent = async function(req,res){
             }
         });
 
+        // send this data for ajax calls purposes
         let students = await Student.find({});
         
         let studentsLength = students.length;

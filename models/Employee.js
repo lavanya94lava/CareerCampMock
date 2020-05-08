@@ -1,4 +1,4 @@
-
+//this file contains schema for employees, the main users of this app.
 const mongoose = require('mongoose');
 
 const bcrypt = require('bcryptjs');

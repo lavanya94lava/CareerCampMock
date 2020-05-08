@@ -1,6 +1,6 @@
 <header>
     <nav class="navbar navbar-expand-lg navbar-light bg-dark justify-content-end">
-        
+        <%if(locals.employee){%>
          <div class="w-100 order-1 order-md-0 dual-collapse2">
             <form action="/students/getAllStudents" method="GET">
                 <div class="col-sm-3">
@@ -22,7 +22,7 @@
                 </div>
             </form>
          </div>
-        <%if(locals.employee){%>
+        
             <ul class="nav navbar-nav navbar-right">
             
 
