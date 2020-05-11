@@ -10,18 +10,18 @@ In this project we are making an interface for a company's employees to view the
 
 # Dependencies Used
 
-1.express
-2.express-session
-3.EJS
-4.EJS-layouts
-5.bootstrap
-6.Noty.js
-7.JQuery
-8.Mongo-Store
-9.Passport-local
-10.bcrypt
-11.flash
-12.cookie-parser
+1. express
+2. express-session
+3. EJS
+4. EJS-layouts
+5. bootstrap
+6. Noty.js
+7. JQuery
+8. Mongo-Store
+9. Passport-local
+10. bcrypt
+11. flash
+12. cookie-parser
 
 # Project structure
 
