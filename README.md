@@ -72,7 +72,7 @@ In this project we are making an interface for a company's employees to view the
             ├── download.js
     ├── .gitignore
 
-    # setup
+# setup
 
 >         https://github.com/lavanya94lava/CareerCampMock.git
 >         cd CareerCampMock
