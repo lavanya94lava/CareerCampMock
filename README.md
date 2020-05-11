@@ -8,7 +8,7 @@ In this project we are making an interface for a company's employees to view the
 1. Node.js 8 or above
 2. MongoDB 4.2
 
-#Dependencies Used
+# Dependencies Used
 
 1.express
 2.express-session
